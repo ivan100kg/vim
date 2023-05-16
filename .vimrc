@@ -15,24 +15,16 @@ endif
 " Plugins =================================================================
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " файловый менеджер
-"Plug 'morhetz/gruvbox'          " цветовая схема
-"Plug 'Valloric/YouCompleteMe'   " автокомплит смотри установку на Github
-"Plug 'jiangmiao/auto-pairs'     " автоскобки и ковычки
-Plug 'tpope/vim-fugitive'       " git встроенный в vim
-"Plug 'airblade/vim-gitgutter'   " git изменения на полях
-Plug 'ctrlpvim/ctrlp.vim'       " ctrl-p поиск файлов по каталогам
 Plug 'easymotion/vim-easymotion'    " передвижение по тексту \s
 Plug 'vim-airline/vim-airline'  " статусбар
 Plug 'vim-airline/vim-airline-themes'   " цветные темы для airline
-"Plug 'rking/ag.vim'   " поиск строк в файлах в рабочем каталоге
-"Plug 'python-mode/python-mode', { 'branch': 'develop' } " python mode
+Plug 'arzg/vim-colors-xcode'
 
 " Initialize plugin system
 call plug#end()
 " =========================================================================
 
-let g:airline_theme='onedark'
+"let g:airline_theme='onedark'
 "set clipboard=unnamedplus   " системный буфер на y p, install vim-gtk
 
 set nocompatible    " откл. совместимость с vi
@@ -52,7 +44,7 @@ set encoding=utf-8  " кодировка файлов и редактора
 set scrolloff=3     " сколько строк внизу/вверху при скролинге
 set wrap            " перенос длинных строк
 set linebreak       " перенос целых слов
-colorscheme onedark " тема
+colorscheme xcodedark " тема
 set background=dark " темный фон
 
 set expandtab       " табы в пробелы
@@ -71,28 +63,3 @@ set smartcase       " search specifically for capital letters
 
 " Press \\ to jump back to the last cursor position.
 nnoremap <leader>\ `` 
-
-"let g:pymode_python = 'python3'
-
-" назначение кнопок
-map <C-n> :NERDTreeToggle<CR>
-map <leader> <Plug>(easymotion-prefix)
-" перемещение между окнами и самих окон ctrl + hjkl
-map <silent> <C-h> :call WinMove('h')<CR>
-map <silent> <C-j> :call WinMove('j')<CR>
-map <silent> <C-k> :call WinMove('k')<CR>
-map <silent> <C-l> :call WinMove('l')<CR>
-
-" функция для перемещения
-function! WinMove(key)
-    let t:curwin = winnr()
-    exec "wincmd ".a:key
-    if (t:curwin == winnr())
-        if (match(a:key,'[jk]'))
-            wincmd v
-        else
-            wincmd s
-        endif
-        exec "wincmd ".a:key
-    endif
-endfunction
